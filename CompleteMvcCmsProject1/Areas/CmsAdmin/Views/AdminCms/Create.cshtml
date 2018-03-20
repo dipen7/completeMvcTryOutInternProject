@@ -1,0 +1,184 @@
+﻿@model CompleteMvcCmsProject1.Areas.CmsAdmin.Models.Student
+@{
+
+}
+
+<div class="row" id="app">
+    <form action="Create" method="post" id="CreateForm" @@submit.prevent="testFormSubmit" enctype="multipart/form-data">
+        <h1 class="col-lg-offset-5 col-md-offset-5">Create Student</h1>
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="Id">Id</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" v-model="Id" v-validate="'required|numeric'" data-vv-as="Idendtity No" class="form-control" name="Id" id="Id" />
+                        <span v-show="errors.has('Id')" class="text-danger from-error">{{errors.first('Id')}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="FirstName">First Name *</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        @*@if (Model != null)
+                    {
+                        < input class="form-control" type="text" value="@Model.FirstName" v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                    }
+                    else
+                    {
+                        < input class="form-control" type="text"  v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                    }*@
+                        <input class="form-control" type="text" v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                        <span v-show="errors.has('FirstName')" class="text-danger from-error">{{errors.first('FirstName')}}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="MidName">Mid Name</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" class="form-control" placeholder="Mid Name" id="MidName" name="MidName" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="LastName">Last Name*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input class="form-control" type="text" v-model="LastName" v-validate="'required'" data-vv-as="Last Name" name="LastName" id="LastName" placeholder="Last Name" />
+                        <span v-show="errors.has('LastName')" class="text-danger from-error">{{errors.first('LastName')}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="Gender">Gender *</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <select id="GenderId" name="GenderId" v-model="genderID" v-validate="'required|otherThanZero'" data-vv-as="Gender" type="text" class="form-control">
+                            <option value="0">select gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Others</option>
+                        </select>
+                        <span v-show="errors.has('GenderId')" class="text-danger from-error">{{errors.first('GenderId')}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="Email">Email*</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" class="form-control" placeholder="abc@qwe.sds" id="Email" name="Email" v-model="Email" v-validate="'required|email'" data-vv-as="Email" />
+                        <span v-show="errors.has('Email')" class="text-danger from-error">{{errors.first('Email')}}</span>
+                    </div>                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="Address">Address</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" id="Address" name="Address" v-model="Address" class="form-control" placeholder="Location" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="Blood Group">Blood Group *</label>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <select id="BloodGrup" name="BloodId" v-model="BloodGroup" v-validate="'required|otherThanZero'" data-vv-as="Blood Group" type="text" class="form-control">
+                            <option value="0" selected>Select Item</option>
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">AB</option>
+                            <option value="4">AB-</option>
+                            <option value="5">A-</option>
+                            <option value="6">B-</option>
+                            <option value="7">O</option>
+                            <option value="8">O-</option>
+                        </select>
+                        <span v-show="errors.has('BloodId')" class="text-danger form-error">{{ errors.first('BloodId') }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <input type="submit" value="Create Student" class="btn btn-primary col-lg-offset-3 col-md-offset-3">
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section scripts{
+    
+<script type="text/javascript">
+        Vue.use(VeeValidate);
+        new Vue({
+            el: '#app',
+            data: {
+                message: "Hello from Vue.js using webpack.",
+                Id:0,
+                FirstName:'',
+                MidName: '',
+                LastName: '',
+                Email: '',
+                genderID:0,
+                Address: '',
+                BloodGroup: 0,
+                QuillContent:''
+            },
+            methods: {
+                selectid: function () {
+                    var vm = this;
+                    axios.get(apiUrl + vm.Id)
+                        .then(function (response) {
+                            vm.Id = response.data.Id;
+                            vm.FirstName = response.data.FirstName;
+                            vm.MidName = response.data.MidName,
+                                vm.LastName = response.data.LastName,
+                                vm.Email = response.data.Email,
+                                vm.genderID = response.data.GenderId,
+                                vm.Address = response.data.Address,
+                                vm.BloodGroup = response.data.BloodId
+                        })
+                        .catch(function (error) { });
+                },
+                testFormSubmit: function () {
+                    //console.log(this.QuillContent);
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            document.querySelector('#CreateForm').submit();
+                        }
+                    }).catch(() => {
+                        var errorBag = this.$validator.getErrors();
+                        var fieldName = errorBag.errors[0].field;
+                        document.querySelector('[name="' + fieldName + '"]').focus();
+                        e.preventDefault();
+                    });
+                }
+            }
+        });
+
+</script>
+}

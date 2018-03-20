@@ -1,0 +1,77 @@
+﻿@model CompleteMvcCmsProject1.Areas.PhotoSection.ViewModel.ViewPhotoVM
+
+@{
+
+    ViewBag.Title = "Index";
+}
+@section Styles{
+
+    <link href="~/Content/Photo.css" rel="stylesheet" />
+}
+
+<h2>Context Management Section</h2>
+<div class="row" id="app">
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <tr>
+                <th>
+                    S.No.:
+                </th>
+                <th>
+                    Photo Name:
+                </th>
+                <th>
+                    Admin Name:
+                </th>
+                <th>
+                    Modified Date:
+                </th>
+                <th class="text-center">
+                    Actions:
+                </th>
+            </tr>
+            @foreach (var photo in Model.PhotoList)
+            {
+                <tr>
+                    <td>
+                        @photo.Id
+                    </td>
+                    <td>
+                        @photo.PhotoName
+                    </td>
+                    <td>
+                        @photo.AdminName
+                    </td>
+                    <td>
+                        @photo.ModifiedDate
+                    </td>
+                    <td>
+                        <span class="btn">
+                            <a href="@string.Format("/PhotoSection/PhotoCms/details?id={0}",photo.Id)">Details</a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/PhotoSection/PhotoCms/modify?id={0}",photo.Id)">
+                                @string.Format("Modify {0}", photo.Id)
+                            </a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/PhotoSection/PhotoCms/deletePhoto?id={0}",photo.Id)">Delete</a>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        Vue.use(VeeValidate);
+        new Vue({
+            el: '#app',
+            data: {
+                message: "Hello from Vue.js using webpack."
+            }
+        });
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Create Photo";
+}
+
+<div class="body" id="app">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <p>Image to use:</p>
+            <img id="scream" :src="url" alt="The Scream" width="220" height="277">
+            <p><button v-on:click="myCanvas()">Upload</button></p>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            @using (Html.BeginForm("Canvas", "PracticePhoto", new { area = "PhotoSection" }, FormMethod.Post, new { id = "drawingForm" }))
+            {
+            <input type="hidden" name="imageData" id="imageData" />
+            <input type="button" id="btnSave" value="preview Upload" @*onclick="checkMyCanvas()"*@ v-on:click="checkMyCanvas" />
+            <div class="row form-group text-center">
+                <div class="form-group">
+                    <input type="file" name="ImageData" id="ImageData" @*v-on:click="previewimage"*@ @@change="onFileChange">
+                    <label for="ImageData"> choose a image</label>
+                </div>
+            </div>
+            <div class="row form-group">
+                <canvas name="PreviewUpload" id="kfCanvas" width="250px" height="300px;" style="border: 3px dotted #000;">
+                    Sorry, your browser doesn't support canvas technology.
+                </canvas>
+                <div><label for="PreviewUpload">Upload Preview</label></div>
+            </div>
+            }
+        </div>        
+    </div>
+</div>
+@section scripts{
+
+    @*<script type="text/javascript">
+            function previewimage(event) {
+                var reader = new FileReader();
+                var imageField = document.getElementById("image-field")
+                reader.onload = function () {
+                    if (reader.readyState == 2) {
+                        imageField.src = reader.result;
+                    }
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>*@
+    <script type='text/javascript'>
+        new Vue({
+            el: '#app',
+            data: {
+                url: null
+            },
+            methods: {
+                testFormSubmit: function () {
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            document.querySelector('#CreateForm').submit();
+                        }
+                    }).catch(() => {
+                        var errorBag = this.$validator.getErrors();
+                        var fieldName = errorBag.errors[0].field;
+                        document.querySelector('[name="' + fieldName + '"]').focus();
+                        e.preventDefault();
+                    });
+                },
+                previewimage: function (e) {
+                    var reader = new FileReader();
+                    var imageField = document.getElementById("image-field")
+                    reader.onload = function () {
+                        if (reader.readyState == 2) {
+                            imageField.src = reader.result;
+                        }
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                },
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    this.url = URL.createObjectURL(file);
+                },
+                checkMyCanvas: function () {
+                    var c = document.getElementById("kfCanvas");
+                    var ctx = c.getContext("2d");
+                    var img = document.getElementById("scream");
+                    ctx.drawImage(img, 0, 0, 250, 300);
+                },
+                myCanvas: function () {
+                    var c = document.getElementById("kfCanvas");
+                    var ctx = c.getContext("2d");
+                    var img = document.getElementById("scream");
+                    ctx.drawImage(img, 0, 0, 250, 300);
+                    var form = $("#drawingForm");
+                    var image = document.getElementById("kfCanvas").toDataURL("image/png");
+                    image = image.replace('data:image/png;base64,', '');
+                    $("#imageData").val(image);
+                    form.submit();
+                }
+            }
+        });
+    </script>
+}

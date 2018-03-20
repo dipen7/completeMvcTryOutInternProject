@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Create Photo";
+}
+
+<div class="body" id="app">
+    <div class="row">
+        <form action="/PhotoSection/PhotoCms/create" method="post" enctype="multipart/form-data">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 text-right">
+                    <label for="AdminName">Admin Name:</label>
+                </div>
+                <div class="col=lg=6 col-md-6 text-left">
+                    @ViewBag.adminName
+                </div>
+            </div>
+            <div class="row form-group text-center">
+                <div class="col-md-7 col-lg-7 col-lg-offset-5 col-md-offset-5">
+                    <input type="file" name="ImageData" id="ImageData" @*v-on:click="previewimage"*@ @@change="onFileChange">
+                </div>
+                <div class="row" >
+                    <label> choose a image</label>
+                    <div id="preview">
+                        <img v-if="url" :src="url"  />
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group text-center">
+                <input type="submit" value="upload Image" />
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+
+    @*<script type="text/javascript">
+        function previewimage(event) {
+            var reader = new FileReader();
+            var imageField = document.getElementById("image-field")
+            reader.onload = function () {
+                if (reader.readyState == 2) {
+                    imageField.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>*@
+    <script type='text/javascript'>
+        new Vue({
+            el: '#app',
+            data: {
+                url: null
+            },
+            methods: {
+                testFormSubmit: function () {
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            document.querySelector('#CreateForm').submit();
+                        }
+                    }).catch(() => {
+                        var errorBag = this.$validator.getErrors();
+                        var fieldName = errorBag.errors[0].field;
+                        document.querySelector('[name="' + fieldName + '"]').focus();
+                        e.preventDefault();
+                    });
+                },
+                previewimage: function (e) {
+                    var reader = new FileReader();
+                    var imageField = document.getElementById("image-field")
+                    reader.onload = function () {
+                        if (reader.readyState == 2) {
+                            imageField.src = reader.result;
+                        }
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                },
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    this.url = URL.createObjectURL(file);
+                }
+            }
+        });
+    </script>
+
+    @*<script type='text/javascript'>
+            function preview_image(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var output = document.getElementById('output_image');
+                    output.src = reader.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>*@
+}

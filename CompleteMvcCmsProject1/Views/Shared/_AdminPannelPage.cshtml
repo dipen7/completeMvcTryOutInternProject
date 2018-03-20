@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+<ul class="nav navbar-nav navbar-left">
+    <li class="btn btn-default">@Html.ActionLink("Admin Pannel", "Index", "AdminCms", new { area = "CmsAdmin" }, null)</li>
+    <li class="btn btn-default">@Html.ActionLink("Photo Admin", "Index", "PhotoCms", new { area = "photosection" }, null)</li>
+</ul>
+}
+else
+{
+    <span></span>
+}

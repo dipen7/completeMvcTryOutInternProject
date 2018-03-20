@@ -1,0 +1,23 @@
+﻿<!--using core js--> 
+<div class="row">
+    <label> choose a image</label>
+    <input type="file" id="file-field" onchange="previewimage(event)">
+    <div>
+        <img src="~/Image/Dipendra.jpg" id="image-field" />
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        function previewimage(event) {
+            var reader = new FileReader();
+            var imageField = document.getElementById("image-field")
+            reader.onload = function () {
+                if (reader.readyState == 2) {
+                    imageField.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

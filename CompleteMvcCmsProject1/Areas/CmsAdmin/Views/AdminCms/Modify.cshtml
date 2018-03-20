@@ -1,0 +1,121 @@
+﻿@model CompleteMvcCmsProject1.Areas.CmsAdmin.Models.Student
+    
+<div class="row">
+    <h1 class="col-lg-offset-5 col-md-offset-5">Modify Student</h1>
+    <form action="/CmsAdmin/AdminCms/Modify" method="post">
+
+        <input type="hidden" value="@Model.Id" name="Id" />
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="Id">Id</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" disabled class="form-control" name="Id" value="@Model.Id" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="FirstName">First Name *</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    @*@if (Model != null)
+                        {
+                            < input class="form-control" type="text" value="@Model.FirstName" v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                        }
+                        else
+                        {
+                            < input class="form-control" type="text"  v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                        }*@
+                    <input class="form-control" value="@Model.FirstName" type="text" v-model="FirstName" v-validate="'required'" data-vv-as="First Name" id="FirstName" name="FirstName" placeholder="First Name" />
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="MidName">Mid Name</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input class="form-control" value="@Model.MidName" type="text" v-model="MidName" data-vv-as="Mid Name" placeholder="Mid Name" id="MidName" name="MidName" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="LastName">Last Name*</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input class="form-control" value="@Model.LastName" type="text" v-model="LastName" v-validate="'required'" data-vv-as="Last Name" name="LastName" id="LastName" placeholder="Last Name" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="Gender">Gender *</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <select id="StudentId" name="GenderId" value="@Model.GenderId" v-model="genderID" v-validate="'required|otherThanZero'" data-vv-as="Gender" type="text" class="form-control">
+                        <option value="0">select gender</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Others</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="Email">Email</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" value="@Model.Email" class="form-control" placeholder="abc@qwe.sds" id="Email" name="Email" v-model="Email" v-validate="'required|email'" data-vv-as="Email" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="Address">Address</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" id="Address" value="@Model.Address" name="Address" v-model="Address" class="form-control" placeholder="Location" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 form-group">
+                <div class="col-lg-6 col-md-6">
+                    <label for="Blood Group">Blood Group *</label>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <select id="BloodGrup" name="BloodId" value="@Model.BloodId" v-model="BloodGroup" v-validate="'required|otherThanZero'" data-vv-as="Blood Group" type="text" class="form-control">
+                        <option value="0" selected>Select Item</option>
+                        <option value="1">A</option>
+                        <option value="2">B</option>
+                        <option value="3">AB</option>
+                        <option value="4">AB-</option>
+                        <option value="5">A-</option>
+                        <option value="6">B-</option>
+                        <option value="7">O</option>
+                        <option value="8">O-</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 ">
+                @Html.ActionLink("back", "Index", "AdminCms", new { area = "CmsAdmin" }, null)
+            </div>            
+            <div class="col-lg-6 col-md-6 form-group">
+                <input type="submit" value="Modify Student" class="btn btn-primary col-lg-offset-3 col-md-offset-3">
+            </div>
+        </div>
+    </form>
+</div>

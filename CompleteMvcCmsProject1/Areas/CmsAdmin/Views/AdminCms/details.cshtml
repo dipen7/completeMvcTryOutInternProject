@@ -1,0 +1,60 @@
+﻿@model CompleteMvcCmsProject1.Areas.CmsAdmin.Models.Student
+
+<div class="row">
+    <h1 class="col-lg-offset-2 col-md-offset-2">Details of @Model.FirstName</h1>
+    <form>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <label for="FullName">Full Name:</label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                @Model.FirstName @if (Model.MidName != null){@Model.MidName} @Model.LastName
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <label for="Email">Email:</label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                @Model.Email
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <label for="Gender">Gender:</label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                @Model.Gender
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <label for="Address">Address:</label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                @Model.Address
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <label for="BloodGroup">BloodGroup:</label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                @Model.BloodGroup
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 btn">
+                @Html.ActionLink("back", "Index", "AdminCms", new { area = "CmsAdmin" }, null)
+            </div>
+            <div class="col-lg-1 col-md-1 btn">
+                <a href="@string.Format("/CmsAdmin/AdminCms/modify?id={0}",Model.Id)">
+                    @string.Format("Modify {0}", Model.Id)
+                </a>
+            </div>
+            <div class="col-lg-1 col-md-1 btn ">
+                <a href="@string.Format("/CmsAdmin/AdminCms/delete?id={0}",Model.Id)">Delete</a>
+            </div>
+        </div>
+    </form>
+</div>

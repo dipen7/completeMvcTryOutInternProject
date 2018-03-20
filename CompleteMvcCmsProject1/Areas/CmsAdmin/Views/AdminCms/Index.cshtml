@@ -1,0 +1,91 @@
+﻿@model CompleteMvcCmsProject1.Areas.CmsAdmin.ViewModel.CustomerPageVM
+
+@{
+
+    ViewBag.Title = "Index";
+}
+
+<h2>Context Management Section</h2>
+<div class="row" id="app">
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <tr>
+                <th>
+                    S.No.:
+                </th>
+                <th>
+                    Name:
+                </th>
+                <th>
+                    Gender:
+                </th>
+                <th>
+                    Email:
+                </th>
+                <th>
+                    Address:
+                </th>
+                <th>
+                    BloodGroup:
+                </th>
+                <th>
+                    QuillContent:
+                </th>
+                <th class="text-center">
+                    Actions:
+                </th>
+            </tr>
+            @foreach (var stdnt in Model.OurCustomers)
+            {
+                <tr>
+                    <td>
+                        @stdnt.Id
+                    </td>
+                    <td>
+                        @stdnt.FirstName @stdnt.LastName
+                    </td>
+                    <td>
+                        @stdnt.Gender
+                    </td>
+                    <td>
+                        @stdnt.Email
+                    </td>
+                    <td>
+                        @stdnt.Address
+                    </td>
+                    <td>
+                        @stdnt.BloodGroup
+                    </td>
+                    <td>
+                        @stdnt.QuillContent
+                    </td>
+                    <td>
+                        <span class="btn">
+                            <a href="@string.Format("/CmsAdmin/AdminCms/details?id={0}",stdnt.Id)">Details</a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/CmsAdmin/AdminCms/modify?id={0}",@stdnt.Id)">
+                                @string.Format("Modify {0}", @stdnt.Id)
+                            </a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/CmsAdmin/AdminCms/delete?id={0}",stdnt.Id)">Delete</a>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        Vue.use(VeeValidate);
+            new Vue({
+                el:'#app',
+                data:{
+                    message:"Hello from Vue.js using webpack."
+                }
+           });
+    </script>
+    }

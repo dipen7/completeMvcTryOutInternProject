@@ -1,0 +1,44 @@
+﻿<div id="app">
+    @using (Html.BeginForm("Canvas", "PracticePhoto", new { area = "PhotoSection" }, FormMethod.Post, new { id = "drawingForm" }))
+    {
+        <input type="hidden" name="imageData" id="imageData" />
+        <input type="button" id="btnSave" value="Save Drawing" onclick="checkMyCanvas()" />
+
+        <canvas id="kfCanvas" width="250px" height="300px;" style="border: 3px dotted #000;
+             cursor:crosshair;">
+            Sorry, your browser doesn't support canvas technology.
+        </canvas>
+    }
+
+    <p>Image to use:</p>
+    <img id="scream" src="/Image/10926Desert.jpg" alt="The Scream" width="220" height="277">
+
+    <p>Canvas to fill:</p>
+    <canvas id="myCanvas" width="250" height="300"
+            style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <p><button onclick="myCanvas()">Try it</button></p>
+</div>
+<script>
+    
+    function checkMyCanvas() {
+        var c = document.getElementById("kfCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("scream");
+        ctx.drawImage(img, 0, 0, 250, 300);
+    }
+    function myCanvas() {
+        var c = document.getElementById("kfCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("scream");
+        ctx.drawImage(img, 0, 0, 250, 300);//(imagesource,srartingpoints,srartingpoints,widthofnewimage,heightOfNewImage)
+        var form = $("#drawingForm");
+        var image = document.getElementById("kfCanvas").toDataURL("image/png");
+        image = image.replace('data:image/png;base64,', '');
+        $("#imageData").val(image);
+        form.submit();
+
+    }
+</script>

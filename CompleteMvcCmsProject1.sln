@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompleteMvcCmsProject1", "CompleteMvcCmsProject1\CompleteMvcCmsProject1.csproj", "{93F4B605-A7BD-4EE5-8949-C1AD0C95910A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93F4B605-A7BD-4EE5-8949-C1AD0C95910A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F4B605-A7BD-4EE5-8949-C1AD0C95910A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F4B605-A7BD-4EE5-8949-C1AD0C95910A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F4B605-A7BD-4EE5-8949-C1AD0C95910A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA479863-1C18-4FF5-8F25-613271D825F0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+{
+  "name": "completemvccmsproject1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "react-svg-loader": "^2.1.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "quill": "^1.3.5",
+    "vee-validate": "^2.0.4",
+    "vue": "^2.5.13",
+    "vue-image-upload-resize": "^1.1.5",
+    "webpack": "^3.11.0"
+  }
+}

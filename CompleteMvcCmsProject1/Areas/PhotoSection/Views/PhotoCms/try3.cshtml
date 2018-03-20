@@ -1,0 +1,26 @@
+﻿
+<div id="app">
+    <input type="file" @@change="onFileChange" />
+
+    <div id="preview">
+        <img v-if="url" :src="url" />
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    url: null,
+                }
+            },
+            methods: {
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    this.url = URL.createObjectURL(file);
+                }
+            }
+        });
+    </script>
+    }
