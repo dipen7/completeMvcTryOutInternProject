@@ -1,0 +1,234 @@
+﻿<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Qubex Private Limited">
+    <title>Update Role Info - Admin Panel</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/Areas/multiselecttry/Content/bootstrap.css" rel="stylesheet" />
+    <!-- Custom fonts for this template-->
+    <link href="~/Areas/multiselecttry/Content/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/Areas/multiselecttry/Content/sb-admin/css/sb-admin.css" rel="stylesheet" />
+    <link href="~/Areas/multiselecttry/Content/vue-multiselect.min.css" rel="stylesheet" />
+    <link href="~/Areas/multiselecttry/Content/site.css" rel="stylesheet" />
+
+    <style>
+        @@font-face {
+            font-family: uc-nexus-iconfont;
+            src: url(chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff) format('woff'),url(chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf) format('truetype')
+        }
+    </style>
+</head>
+
+
+
+
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="/">Reelnepal Manager</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                    <a class="nav-link" href="/">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+                    <a class="nav-link" href="/manage-movies">
+                        <i class="fa fa-fw fa-file-movie-o"></i>
+                        <span class="nav-link-text">Movie Management</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form action="/account/logoff" id="logoutForm" method="post">
+                        <input name="__RequestVerificationToken" type="hidden" value="UZs5STdNFSBn_V8F-iLjt6IGEZ9nAXMEuFAXd7Ue1h2NxJdL36ua-2uxtev-xRh8ePL8ua6W6V_tvscCk2CMKUPSIxrGfBkcbFEGgtwZawTMzZ3Q_MBply4RwHqOgXPESaDUv_zlyWFtqOhwDaiKjA2">
+                        <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+
+
+
+            <div id="app">
+                <h3>Update Info - <a href="/movie/update-info/102093">Dream Girl</a></h3> <hr> 
+                <form action="/movie/update-role-info" method="post" id="thisForm">
+                    <input name="__RequestVerificationToken" type="hidden" value="4OJQitq27OpCm4IiWvvVa01xmMtIHfen2LqUKw4ZNSLe03P9q1OsVtXKPflVkt35jx-V5uQfTbB7AGnWb6wJ-b7UFCV7AFK8xLem8NYAN9W8fhnCDv69XQ6b-AclGV1lnr5v8TY2PsJgagF-0FaJ-w2"> 
+                    <input type="hidden" name="MovieId" value="102093"> 
+                    <input type="hidden" name="RoleId" value="82"> 
+                    <input type="hidden" name="CrewIds" id="crewIdsString"> 
+                    <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="form-group"><label for="role-name"><strong>Child Artists</strong></label> 
+                            <div>
+                                <div tabindex="-1" class="multiselect"><div class="multiselect__select">
+                                </div> <!----> 
+                                <div class="multiselect__tags">
+                                    <div class="multiselect__tags-wrap" style="display: none;"></div> <!----> 
+                                    <div class="multiselect__spinner" style="display: none;"></div> 
+                                        <input name="" type="text" autocomplete="off" placeholder="Type to search" tabindex="0" class="multiselect__input"> <!---->
+                                </div> 
+                                <div class="multiselect__content-wrapper" style="max-height: 358px; display: none;">
+                                    <ul class="multiselect__content" style="display: block;"> <!---->  
+                                        <li style="display: none;"><span class="multiselect__option"><span>Oops! No Crew Found.</span></span></li> 
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                    </div>
+                </form> <hr> 
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">New Crew</h5> <hr> <div class="form-group"><label>Name *</label> <input type="text" class="form-control"></div> <div class="form-group"><label>Nepali Name</label> <input type="text" class="form-control"> <small class="text-danger"></small></div> <button class="btn btn-info">
+                                    <!----> Create Crew
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Qubex Private Limited 2018</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+
+
+        <script type="text/javascript" defer="" async="" src="https://track.uc.cn/uaest.js"></script>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="~/Areas/multiselecttry/Scripts/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="~/Areas/multiselecttry/Scripts/sb-admin/sb-admin.js"></script>
+
+        <script src="~/Areas/multiselecttry/Scripts/bundle.js"></script>
+
+        <script type="text/javascript">
+            new Vue({
+                el: '#app',
+                components: { Multiselect },
+                data: {
+                    crew: {
+                        name: '',
+                        namenepali: '',
+                        postMessage: '',
+                        isPosting: false,
+                        selectedCrew: [],
+                        crewData: [],
+                        isLoading: false,
+                    }
+                },
+                methods: {
+                    limitText(count) {
+                        return `and ${count} other items`
+                    },
+                    loadCrewData: function (query) {
+                        var vm = this;
+                        axios.get('/api/general/crew/search?query=' + query)
+                            .then(function (response) {
+                                vm.crew.crewData = [];
+                                if (response.data.statusCode == 200) {
+                                    vm.crew.crewData = response.data.result;
+                                }
+                            })
+                            .catch(function (error) {
+                                alert(error);
+                            })
+                    },
+                    convertToCommaSeparated: function (item) {
+                        var temp = "";
+                        Object.keys(item).forEach(function (key) {
+                            temp += item[key].id + ",";
+                        });
+                        return temp;
+                    },
+                    submitForm: function () {
+                        document.querySelector("#crewIdsString").value = this.convertToCommaSeparated(this.crew.selectedCrew);
+                        let crewString = document.querySelector("#crewIdsString").value;
+                        if (!crewString) {
+                            alert("The Crews are not selected.");
+                            return;
+                        }
+                        document.querySelector("#thisForm").submit();
+                    },
+                    postCrew: function () {
+                        var vm = this;
+                        vm.crew.isPosting = true;
+                        vm.crew.postMessage = '';
+                        axios({
+                            method: 'post',
+                            url: '/api/general/crew/insert',
+                            data: { "Name": vm.crew.name, "NameNepali": vm.crew.namenepali }
+                        })
+                            .then(function (response) {
+                                //console.log(response);
+                                if (response.data.statusCode == 200) {
+                                    vm.crew.postMessage = response.data.result;
+                                    vm.crew.isPosting = false;
+                                    vm.crew.name = '';
+                                    vm.crew.namenepali = '';
+                                }
+                                if (response.data.statusCode != 200) {
+                                    vm.crew.postMessage = response.data.errorMessage;
+                                    vm.crew.isPosting = false;
+                                    vm.crew.name = '';
+                                    vm.crew.namenepali = '';
+                                }
+                            })
+                            .catch(function (error) {
+                                vm.crew.isPosting = false;
+                            });
+                    }
+                },
+                mounted: function () {
+
+                }
+            });
+        </script>
+
+    </div>
+
+
+</body>

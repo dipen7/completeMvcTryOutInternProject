@@ -1,0 +1,28 @@
+﻿
+
+@model CompleteMvcCmsProject1.Areas.NewsPortal.Models.summernoteNews
+
+@{
+    ViewBag.Title = "view news";
+}
+
+@section Styles{
+    <link href="~/Areas/NewsPortal/template/style.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="row">
+        <article style="overflow: hidden;">
+            <div class="row " style="padding-left:30px;padding-right:30px;">
+                <h1>@Model.Subject</h1>
+                Published Date:@string.Format("{0:yyyy-MM-dd}",Model.PublishedDate)
+                <hr />
+            </div>
+            <div class="row" style="padding-left:20px; padding-right:30px;">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Discussion))
+            </div>
+        </article>
+    </div>
+</div>
+
+@section scripts{     
+}

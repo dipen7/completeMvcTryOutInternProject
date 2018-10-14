@@ -62,14 +62,39 @@
             }
         </table>
     </div>
+    <my-component aprop=" with static data"></my-component>
+    <my-component :aprop="Dynamic"></my-component>
+    <multiprop v-bind="todo"></multiprop>
 </div>
 
 @section scripts{
     <script type="text/javascript">
+        Vue.component('multiprop', {
+            props: ['isComplete', 'text'],
+            template: '<div>A custom multiprop component!{{text}} {{isComplete}}</div>'
+        })
+
+        Vue.component('child', {
+            // declare the props
+            props: ['aprop'],
+            // like data, the prop can be used inside templates and
+            // is also made available in the vm as this.message
+            template: '<span>{{ aprop }}</span>'
+        })
+
+        Vue.component('my-component', {
+            props: ['aprop'],
+            template: '<div>A custom component!{{aprop}}</div>'
+        })
         Vue.use(VeeValidate);
         new Vue({
             el: '#app',
             data: {
+                todo: {
+                    text: 'Learn Vue',
+                    isComplete: false
+                },
+                Dynamic:" dynamic data",
                 message: "Hello from Vue.js using webpack."
             }
         });

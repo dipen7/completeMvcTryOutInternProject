@@ -1,0 +1,102 @@
+﻿@section Styles{
+
+    <link href="~/Content/typeaheadjs.css" rel="stylesheet" />
+    <link href="~/Content/typeahead-multiselect.css" rel="stylesheet" />
+}
+<div id="typeaheadmulti">
+    <input class="typeahead" type="text" placeholder="Search Languages">
+</div>
+
+<div id="remote" style="">
+    <input class="typeahead" type="text" placeholder="Oscar winners for Best Picture" style="width:500px">
+</div>
+
+@section scripts{
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+
+    <script src="~/Scripts/typeahead-multiselect.js"></script>
+    <script type="text/javascript">
+
+        var data = [];
+        var vm = this;
+        var apiUrl = "/values/getallproducts/";
+        axios.get(apiUrl)
+            .then(function (response) {
+                vm.data = response.data;
+            })
+            .catch(function (error) {
+
+            });
+        console.log(vm.data);
+        $(document).ready(function () {
+
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('AdminName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: '/values/GetAllPhotoUpload',
+                    cache: false
+                },
+                remote: {
+                    url: '../data/films/queries/%QUERY.json',
+                    wildcard: '%QUERY'
+                }
+            });            
+            $('#remote .typeahead').typeahead(null, {
+                name: 'best-pictures',
+                display: 'AdminName',
+                source: bestPictures,
+                templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'unable to find any Best Picture winners that match the current query',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function (data) {
+                        //return (console.log(data.states));
+                        return '<div> <p> <img style="width:50px;" src="/Image/' + data.PhotoName + '"/><strong >' + data.AdminName + '</strong>' + data.PhotoName + '</p></div>';
+                    }
+                }
+            }).bind('typeahead:selected', function (object, datum) {
+                //console.log(datum);
+                var id = datum.Id; //if you want to pass an Id parameter
+                window.location.href = '@Url.Action("custtemptryview", "News", new { Area = "newsportal" })/' + id;
+                });
+
+
+
+            var language = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: ["English", "Arabic", "Japanese"]
+            });
+
+            $('#typeaheadmulti .typeahead').typeaheadmulti({
+                hint: false,
+                highlight: true,
+                minLength: 1
+            },
+                {
+                    name: 'language',
+                    source: language
+                });
+
+            
+            //$('#remote').on([
+            //    'typeahead:initialized',
+            //    'typeahead:initialized:err',
+            //    'typeahead:selected',
+            //    'typeahead:autocompleted',
+            //    'typeahead:cursorchanged',
+            //    'typeahead:opened',
+            //    'typeahead:closed'
+            //].join(' '), function (x) {
+            //    console.log(this.value);
+            //});
+        });
+
+
+    </script>
+
+
+}

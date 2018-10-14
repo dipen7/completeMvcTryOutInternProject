@@ -1,0 +1,55 @@
+﻿working via cdn
+@section Styles{
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+}
+
+<div id="app" >
+    <multiselect v-model="value"
+                 :options="options"
+                 :multiple="true"
+                 track-by="library"
+                 :custom-label="customLabel">
+    </multiselect>
+    <pre>{{ value }}</pre>
+</div>
+
+@section scripts{
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
+
+    <script type="text/javascript">
+        Vue.component('vue-multiselect', window.VueMultiselect.default);
+        new Vue({
+            components: { Multiselect },
+            data: {
+                opt:[],
+                value: { language: 'JavaScript', library: 'Vue-Multiselect' },
+                options: [
+                    { language: 'JavaScript', library: 'Vue.js' },
+                    { language: 'JavaScript', library: 'Vue-Multiselect' },
+                    { language: 'JavaScript', library: 'Vuelidate' }
+                ]
+            },
+            methods: {
+                customLabel(option) {
+                    return `${option.library} - ${option.language}`
+                },
+                selectid: function () {
+                    var vm = this;
+                    axios.get('/TypeAhead/getaAllStates')
+                        .then(function (response) {
+                            vm.opt = response.data;
+                            console.log(vm.opt);
+                        })
+                        .catch(function (error) { });
+                    console.log(vm.opt);
+                }
+            },
+            mounted: function () {
+                console.log(this.opt);
+                this.selectid();
+                console.log(this.opt);
+                console.log(opt);
+            }
+        }).$mount('#app')
+    </script>
+}

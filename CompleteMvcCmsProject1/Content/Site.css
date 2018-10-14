@@ -35,3 +35,11 @@ textarea {
         max-width: 100%;
         max-height: 500px;
 }
+
+#myDIV {
+    width: auto;
+    padding: 5px 0;
+    text-align: center;
+    background-color: lightblue;
+    display: none;
+}

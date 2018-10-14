@@ -1,6 +1,7 @@
 ﻿using CompleteMvcCmsProject1.Areas.CmsAdmin.Models;
 using CompleteMvcCmsProject1.Areas.CmsAdmin.ViewModel;
 using Dapper;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +17,26 @@ namespace CompleteMvcCmsProject1.Areas.CmsAdmin.Controllers
     [Authorize]
     public class AdminCmsController : Controller
     {
+        [HttpGet]
+        public ActionResult VueIndex()
+        {
+            try
+            {
+                string _connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString as string;
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    CustomerPageVM pageVM = new CustomerPageVM();
+                    var query = "GetAllStudent";
+                    pageVM.OurCustomers = db.Query<Student>(query, commandType: CommandType.StoredProcedure);
+                    return new ViewAsPdf(pageVM);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
 
         // GET: CmsAdmin/AdminCms
         public ActionResult Index()
@@ -28,6 +49,9 @@ namespace CompleteMvcCmsProject1.Areas.CmsAdmin.Controllers
                     CustomerPageVM pageVM = new CustomerPageVM();
                     var query = "GetAllStudent";
                     pageVM.OurCustomers = db.Query<Student>(query, commandType: CommandType.StoredProcedure);
+                    HttpCookie cookie = new HttpCookie("TestCookie");
+                    cookie.Value = "This is test cookie";
+                    this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                     return View(pageVM);
                 }
             }
@@ -74,6 +98,7 @@ namespace CompleteMvcCmsProject1.Areas.CmsAdmin.Controllers
         //}
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult create(Student Instd)
         {
             try

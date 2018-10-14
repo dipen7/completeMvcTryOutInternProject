@@ -1,0 +1,63 @@
+﻿
+@model CompleteMvcCmsProject1.Areas.NewsPortal.Models.summernoteNews
+
+@{
+                ViewBag.Title = "View Photo";
+}
+
+@section Styles{
+    <link href="~/Content/summernote.css" rel="stylesheet" />
+}
+
+
+    <div class="row" id="app">
+        <div class="row">
+            <form action="/PhotoSection/PhotoCms/create" method="post" enctype="multipart/form-data" >
+                <div class="row form-group">
+                    <div class="col-md-6 col-lg-6">
+                        <label for="Subject">Subject:</label>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        @Model.Subject
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <input type="hidden" value="0" id="converted">
+                    <div class="row">
+                        <label for="Discussion">discussion:</label>
+                    </div>
+                    <div class="row" id="Discussion" style="padding-left:20px; padding-right:300px;">
+                        @Html.Raw(HttpUtility.HtmlDecode(Model.Discussion))
+                    </div>
+                </div>
+                <div><input type="button" @@click="func"></div>
+            </form>
+        </div>        
+    </div>
+
+@section scripts{
+    <script src="~/Scripts/summernote.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Discussion').summernote();
+            $('#Computed').summernote();
+            console.log($('#Computed').summernote('code'));
+        });
+        new Vue({
+            el: '#app',
+            data: {
+                todo: {
+                    text: 'Learn Vue',
+                    isComplete: false
+                },
+                Dynamic: " dynamic data",
+                message: "Hello from Vue.js using webpack."
+            },
+            methods:{
+                func: function () {
+                    this.Dynamic =$('#Discussion').summernote('code').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+                }                
+            }
+        });
+    </script>
+}

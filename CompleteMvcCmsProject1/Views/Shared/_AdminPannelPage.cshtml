@@ -1,9 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-<ul class="nav navbar-nav navbar-left">
-    <li class="btn btn-default">@Html.ActionLink("Admin Pannel", "Index", "AdminCms", new { area = "CmsAdmin" }, null)</li>
-    <li class="btn btn-default">@Html.ActionLink("Photo Admin", "Index", "PhotoCms", new { area = "photosection" }, null)</li>
+<ul class="list-group">
+    <li>@Html.ActionLink("Admin Pannel", "Index", "AdminCms", new { area = "CmsAdmin" }, null)</li>
+    <li>@Html.ActionLink("Photo Admin", "Index", "PhotoCms", new { area = "photosection" }, null)</li>
+    <li>@Html.ActionLink("News Portal Admin", "Index", "news", new { area = "newsportal" }, null)</li>
 </ul>
 }
 else

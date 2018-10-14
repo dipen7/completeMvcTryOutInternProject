@@ -1,8 +1,20 @@
 ﻿import Vue from 'vue/dist/vue.js';
 import VeeValidate from 'vee-validate';
 import axios from 'axios';
-import Quill from 'quill/core';
-import ImageUploader from 'vue-image-upload-resize';
+import Multiselect from 'vue-multiselect';
+import DataTable from 'vue-datatable';
+//export default {
+//    // OR register locally
+//    components: { Multiselect },
+//    data() {
+//        return {
+//            value: null,
+//            options: ['list', 'of', 'options']
+//        }
+//    }
+//};
+//import Quill from 'quill/core';
+//import ImageUploader from 'vue-image-upload-resize';
 
 //import Toolbar from 'quill/modules/toolbar';
 //import Snow from 'quill/themes/snow';
@@ -11,11 +23,14 @@ import ImageUploader from 'vue-image-upload-resize';
 //    'themes/snow': Snow
 //});
 
-window.Quill = Quill;
+//window.Quill = Quill;
+
 window.Vue = Vue;
 window.VeeValidate = VeeValidate;
 window.axios = axios;
-window.ImageUploader = ImageUploader;
+window.Multiselect = Multiselect;
+window.DataTable = DataTable;
+//window.ImageUploader = ImageUploader;
 
 
 //validation Extensions

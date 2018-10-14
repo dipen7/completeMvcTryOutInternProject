@@ -1,0 +1,32 @@
+﻿@*@section Styles{
+    <style type="text/css">        
+        #myDIV {
+            width: auto;
+            padding: 5px 0;
+            text-align: center;
+            background-color: lightblue;
+            
+            display:none;
+        }
+    </style>
+}*@
+
+<input type="button" value="show Practice links" onclick="show()">
+<div id="myDIV">
+    @Html.Partial("_testpages")
+</div>
+this is the unhidden text
+
+@section scripts{
+    <script type="text/javascript">
+        //function show() {
+        //    var x = document.getElementById("myDIV");
+        //    if (x.style.display === "none") {
+        //        x.style.display = "block";
+        //    } else {
+        //        x.style.display = "none";
+        //    }
+        //}
+    </script>
+}
+

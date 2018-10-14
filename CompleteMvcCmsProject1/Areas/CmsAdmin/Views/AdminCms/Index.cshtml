@@ -1,11 +1,18 @@
 ﻿@model CompleteMvcCmsProject1.Areas.CmsAdmin.ViewModel.CustomerPageVM
 
-@{
+@{ 
+    if (Request.Cookies["TestCookie"]!=null)
+    {
+        HttpCookie cookie = Request.Cookies["TestCookie"];
+
+        ViewBag.CookieMessage = cookie.Value;
+    }
 
     ViewBag.Title = "Index";
 }
 
 <h2>Context Management Section</h2>
+@ViewBag.CookieMessage
 <div class="row" id="app">
     <div class="table-responsive">
         <table class="table table-condensed">

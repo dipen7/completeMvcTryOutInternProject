@@ -1,0 +1,169 @@
+﻿
+@model CompleteMvcCmsProject1.Areas.NewsPortal.Models.PersonSearch
+
+@{
+    ViewBag.Title = "person searached";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .dropbtn:hover, .dropbtn:focus {
+                background-color: #3e8e41;
+            }
+
+        #myInput {
+            border-box: box-sizing;
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+            #myInput:focus {
+                outline: 3px solid #ddd;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            position: relative;
+            display: block;
+        }
+    </style>
+}
+    <div id="the-basics">
+        <input class="typeahead" type="text" placeholder="States of USA">
+    </div>
+<div id="app" class="row">
+    <div class="row">
+        <div class="dropdown col-lg-12 col-md-12">
+            <button @@click="myFunction" class="dropbtn col-lg-2 col-md-2"><span class="fa fa-search"></span></button>
+            <div id="myDropdown" class="dropdown-content col-lg-10 col-md-10">
+                <input type="text" placeholder="Search.." id="myInput" v-model="search" @@keyup="filterFunction">
+                <span style="position:fixed;">
+                    <a :href="'/NewsPortal/News/PersonSearched/' + student.Id" v-show="search" v-for="student in studentData" :value="student.Id">{{student.FirstName }} {{ student.MiidName}} {{student.LastName}}</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 text-right">
+            <label for="firstname">First Name:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 text-left">
+            <input type="text" disabled value="@Model.FirstName" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 text-right">
+            <label for="midname">Miid Name:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 text-left">
+            <input type="text" disabled value="@Model.MiidName" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 text-right">
+            <label for="lastname">Last Name:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 text-left">
+            <input type="text" disabled value="@Model.LastName" />
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        Vue.use(VeeValidate);
+
+        new Vue({
+            el: '#app',
+            data: {
+                studentId: 0,
+                studentData: [],
+                search: ''
+            },
+            methods: {
+                myFunction: function () {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                },
+                filterFunction: function () {
+                    var vm = this;
+                    var apiUrl = "/values/SearchByName/";
+                    axios.get(apiUrl + vm.search)
+                        .then(function (response) {
+                            vm.studentData = response.data;
+                        })
+                        .catch(function (error) {
+                        });
+                    console.log(this.studentData);
+                },
+                change: function () {
+                    var vm = this;
+                    var apiUrl = "/values/getallproducts/";
+                    axios.get(apiUrl + vm.search)
+                        .then(function (response) {
+                            vm.studentData = response.data;
+                        })
+                        .catch(function (error) {
+
+                        });
+                    console.log(this.studentData);
+                },
+                testFormSubmit: function () {
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            document.querySelector('#testForm').submit();
+                        }
+                    }).catch(() => {
+                        var errorBag = this.$validator.getErrors();
+                        var fieldName = errorBag.errors[0].field;
+                        document.querySelector('[name="' + fieldName + '"]').focus();
+                        e.preventDefault();
+                    });
+                }
+            }
+
+        });
+    </script>
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+}

@@ -1,0 +1,127 @@
+﻿
+@section Styles{
+    <style>
+        ul li {
+            display: block;
+            position: relative;
+            float: left;
+        }
+        /* This hides the dropdowns */
+        li ul {
+            display: none;
+        }
+
+        ul li a {
+            display: block;
+        }
+        /* Display the dropdown */
+        li:hover > ul {
+            display: block;
+            position: absolute;
+        }
+
+        li:hover li {
+            float: none;
+        }
+
+        /* Displays second level dropdowns to the right of the first level dropdown */
+        ul ul ul {
+            left: 100%;
+            top: 0;
+        }
+        /* Simple clearfix */
+        ul:before,
+        ul:after {
+            content: " "; /* 1 */
+            display: table; /* 2 */
+        }
+
+        ul:after {
+            clear: both;
+        }
+
+        dropul {
+            display: block;
+            position: relative;
+            float: left;
+        }
+
+        dropli {
+            display: none;
+        }
+
+        dropul:hover > dropli {
+            display: block;
+            position: absolute;
+        }
+
+        dropul dropli dropli {
+            left: 100%;
+            top: 0;
+        }
+
+        dropli:hover > dropli {
+            display: block;
+            position: absolute;
+        }
+    </style>
+}
+<ul class="main-navigation">
+    <li><a href="#">Home</a></li>
+    <li>
+        <a href="#">Front End Design</a>
+        <ul>
+            <li><a href="#">HTML</a></li>
+            <li>
+                <a href="#">CSS</a>
+                <ul>
+                    <li><a href="#">Resets</a></li>
+                    <li><a href="#">Grids</a></li>
+                    <li><a href="#">Frameworks</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">JavaScript</a>
+                <ul>
+                    <li><a href="#">Ajax</a></li>
+                    <li><a href="#">jQuery</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">WordPress Development</a>
+        <ul>
+            <li><a href="#">Themes</a></li>
+            <li><a href="#">Plugins</a></li>
+            <li>
+                <a href="#">Custom Post Types</a>
+                <ul>
+                    <li><a href="#">Portfolios</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Options</a></li>
+        </ul>
+    </li>
+    <li><a href="#">About Us</a></li>
+</ul>
+<div class="row">
+    this is after select
+    <dropul>
+        options
+        <dropli>
+            list
+            <dropli>
+                list1
+            </dropli>
+        </dropli>
+    </dropul>
+</div>
+<div class="row">
+    after coustom select
+</div>
+
+
+
+

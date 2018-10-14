@@ -1,0 +1,27 @@
+﻿@model CompleteMvcCmsProject1.Areas.PhotoSection.Models.summernote
+@section Styles{
+<link href="~/Content/summernote.css" rel="stylesheet" />
+}
+<body>
+    <form name="tryone" id="tryone" action="quilljstry" method="post">
+        <div id="summernote" name="summernote"><p>Hello Summernote</p></div>
+        <input type="hidden" name="content" id="content" value="0">
+        <input type="submit" onclick="funcMyHtml()">
+    </form>
+    <textarea  id="summernote2" name="summernote2">@if (!(@Model.content.IsEmpty())) { @Model.content} </textarea>
+</body>
+
+@section scripts{
+<script src="~/Scripts/summernote.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            $('#summernote2').summernote();
+        });
+        function funcMyHtml() {
+            console.log($('#summernote').summernote('code'));
+            document.getElementById("content").value = $('#summernote').summernote('code');
+        }
+
+    </script>
+}

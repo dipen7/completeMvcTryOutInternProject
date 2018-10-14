@@ -1,0 +1,90 @@
+﻿
+@section Styles{
+
+    <link href="~/Content/multiselect.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+}
+<div id="app">
+vuedatatable
+    <data-table :data-table="tableData"></data-table>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        //Vue.component('multiselect', Multiselect);
+        //Vue.component('VueMultiselect', window.VueMultiselect.default);
+        //Vue.use(DataTable);
+
+        new Vue({
+            components: {DataTable},
+            data: {
+                tableData: {
+                    options: {
+                        //Global sort option 
+                        sortable: true,
+                        //Global edit option 
+                        editable: true,
+                        //How many items will be shown in each page 
+                        pageCount: 10,
+                        //Callback of change page 
+                        onPageChanged(page) {
+                            console.log(page);
+                        }
+                    },
+
+                    columns: [
+                        {
+                            value: 'id',
+                            text: 'ID',
+                            //If this column is sortable 
+                            sortable: true,
+                            //If this column is editable 
+                            editable: false
+                        }
+                    ],
+
+                    rows: [
+                        {
+                            id: {
+                                value: 1,
+                                //If this field is editable 
+                                editable: false
+                            }
+                        }
+                    ]
+                },
+                value: [{ Id: 1}],//value=null
+                options: [
+                    { Id:1, title: 'Space Pirate', desc: 'More space battles!', img: 'http://localhost:51641/Image/86088177.jpg' },
+                    { Id: 2, title: 'Merchant', desc: 'PROFIT!', img: 'http://localhost:51641/Image/01416Tulips.jpg' },
+                    { Id: 3, title: 'Explorer', desc: 'Discovering new species!', img: 'http://localhost:51641/Image/91294170.jpg' },
+                    { Id: 4, title: 'Miner', desc: 'We need to go deeper!', img: 'static/posters/resource_lab.png' }
+                ]
+            },
+            methods: {
+                customLabel({ title, desc }) {
+                    return `${title} – ${desc}`
+                },
+                consolelog: function () {
+                    vm = this;
+                    console.log(this);
+                    console.log(this._data.value[0].Id);
+                    console.log(this.convertToCommaSeparated(this._data.value));
+                    document.querySelector("#selectedItem").value = this.convertToCommaSeparated(this._data.value);
+                    console.log(document.querySelector("#selectedItem").value);
+                },
+                convertToCommaSeparated: function (item) {
+                    var temp = [];
+                    Object.keys(item).forEach(function (key) {
+                        temp.push(item[key].Id);
+                        //temp += item[key].Id + ",";
+                    });
+                    return temp;
+                }
+            },
+            mounted: function () {
+
+            }
+        }).$mount('#app')
+    </script>
+    }

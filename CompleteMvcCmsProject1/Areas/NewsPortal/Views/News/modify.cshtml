@@ -1,0 +1,83 @@
+﻿
+@model CompleteMvcCmsProject1.Areas.NewsPortal.Models.summernoteNews
+@{
+
+    ViewBag.Title = "Modify Photo";
+}
+
+@section Styles{
+    <link href="~/Content/summernote.css" rel="stylesheet" />
+    <style type="text/css">
+        input[type=text] {
+            max-width: 100%;
+            width: 98%;
+            margin-left: 15px;
+        }
+
+        .sub {
+            margin-left: 0px;
+        }
+        h1 {
+            margin-top:0px;
+        }
+        input[type=datetime-local] {
+            max-width: 100%;
+            margin-left: 15px;
+        }
+    </style>
+}
+
+<div class="row" id="app">
+    <form action="/NewsPortal/news/modify" method="post" enctype="multipart/form-data" id="drawingForm">
+        <div class="row text-center">
+            <h1>Modify</h1>
+        </div>
+        <input type="hidden" value="@Model.Id" name="id">
+        <div class="row form-group">
+            <div class="row text-left sub">
+                <label for="Subject">Subject:</label>
+            </div>
+            <div class="row text-left">
+                <input type="text" value="@Model.Subject" name="Subject" />
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="row text-left sub">
+                <label for="PublishedDate">Published Date:</label>
+            </div>
+            <div class="row text-left">
+                <input type="datetime-local"  name="PublishedDate" />
+            </div>            
+        </div>
+        <div class="row form-group">
+            <label for="summernote">Discussion</label>
+            <div id="summernote" name="summernote">@Html.Raw(HttpUtility.HtmlDecode(Model.Discussion))</div>
+            <input type="hidden" name="Discussion" id="Discussion" value="0">
+
+            <a href="/newsportal/news/"><input type="button" value="back" class="btn"></a>
+            <input type="submit" onclick="funcMyHtml()">
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/summernote.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            console.log(document.getElementById("Discussion").value);
+            document.getElementById("Discussion").value = safe_tags(document.getElementById("Discussion").value);
+            console.log(document.getElementById("Discussion").value);
+        });
+
+        function safe_tags(str) {
+            return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        }
+
+        function funcMyHtml() {
+            console.log($('#summernote').summernote('code'));
+            document.getElementById("Discussion").value = $('#summernote').summernote('code');
+            console.log(document.getElementById("Discussion").value);
+        }
+    </script>
+}

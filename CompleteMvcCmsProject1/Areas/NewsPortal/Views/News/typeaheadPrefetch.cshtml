@@ -1,0 +1,97 @@
+﻿@section Styles{
+
+}
+<div id="prefetch">
+    <input class="typeahead" type="text" placeholder="Countries">
+</div>
+
+
+
+remoteedit
+<div id="remoteedit">
+    <input class="typeahead" type="text" placeholder="Oscar winners for Best Picture">
+</div>
+<div id="remote">
+    <input class="typeahead" type="text" placeholder="Oscar winners for Best Picture">
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //// add states var here (search data)
+            //var states = ['Alabama', 'Chicago', 'dipndra','chandra prakash pandey']
+
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('states'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: '/TypeAhead/getaAllStates',
+                    cache: false
+                },
+                remote: {
+                    url: '../data/films/queries/%QUERY.json',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#remote .typeahead').typeahead(null, {
+                name: 'best-pictures',
+                display: 'states',
+                source: bestPictures,
+                templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'unable to find any Best Picture winners that match the current query',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function (item) { return "<p style='padding:6px'><b>" + item.value + "</b> - Release date" + item.release_date + "</p>"; }
+                }
+            });
+
+            //--prefetch
+            var countries = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                // url points to a json file that contains an array of country names, see
+                // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+                prefetch: '/Areas/NewsPortal/TypeAheadData/Countries.json'
+            });
+
+            // passing in `null` for the `options` arguments will result in the default
+            // options being used
+            $('#prefetch .typeahead').typeahead(null, {
+                name: 'countries',
+                source: countries
+            });
+
+
+            //prefetch edit for student
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('FirstName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: '/values/GetAllPersonSearch',
+                    cache: false
+                },
+                remote: {
+                    url: '../data/films/queries/%QUERY.json',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#remoteedit .typeahead').typeahead(null, {
+                name: 'best-pictures',
+                display: 'FirstName',
+                source: bestPictures
+            });
+            $('.typeahead').bind('typeahead:select', function (ev, suggestion) {
+                console.log('Selection: ' + suggestion);
+            });
+        });
+    </script>
+
+
+}

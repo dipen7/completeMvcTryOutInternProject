@@ -1,0 +1,77 @@
+﻿just worked like miracle
+remote with template
+<div id="remote">
+    <input class="typeahead" type="text" placeholder="Oscar winners for Best Picture">
+</div>
+
+@section scripts{
+    <script src="~/Scripts/typeahead.bundle.js"></script>
+    <script type="text/javascript">
+        var data = [];
+        var vm = this;
+        var apiUrl = "/values/getallproducts/";
+        axios.get(apiUrl)
+            .then(function (response) {
+                vm.data = response.data;
+            })
+            .catch(function (error) {
+
+            });
+        console.log(vm.data);
+        $(document).ready(function () {
+            var bestPictures = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('FirstName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: {
+                    url: '/values/GetAllPersonSearch',
+                    cache: false
+                },
+                remote: {
+                    url: '../data/films/queries/%QUERY.json',
+                    wildcard: '%QUERY'
+                }
+            });
+            var vm = this;
+            myObj = { "name": "John", "age": 30, "car": null };
+            console.log(myObj);
+            $('#remote .typeahead').typeahead(null, {
+                name: 'best-pictures',
+                display: 'FirstName',
+                source: bestPictures,
+                templates: {
+                    empty: [
+                        '<div class="empty-message">',
+                        'unable to find any Best Picture winners that match the current query',
+                        '</div>'
+                    ].join('\n'),
+                    suggestion: function (data) {
+                        //return (console.log(data.states));
+                        return '<p><strong>' + data.FirstName + '</strong> -' + data.LastName + '</p>';
+                    }
+                }
+            }).bind('typeahead:selected', function (object, datum) {
+                //console.log(datum.Id);
+                var id = datum.Id; //if you want to pass an Id parameter
+                window.location.href = '@Url.Action("custtemptryview", "News", new { Area = "newsportal" })/' + id;
+    });
+
+
+
+    //$('#remote').on([
+    //    'typeahead:initialized',
+    //    'typeahead:initialized:err',
+    //    'typeahead:selected',
+    //    'typeahead:autocompleted',
+    //    'typeahead:cursorchanged',
+    //    'typeahead:opened',
+    //    'typeahead:closed'
+    //].join(' '), function (x) {
+    //    console.log(this.value);
+    //});
+});
+
+
+    </script>
+
+
+}

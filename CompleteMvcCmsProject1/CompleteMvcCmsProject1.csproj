@@ -49,19 +49,36 @@
     <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -192,6 +209,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\CmsAdmin\CmsAdminAreaRegistration.cs" />
     <Compile Include="Areas\CmsAdmin\Controllers\AdminCmsController.cs" />
     <Compile Include="Areas\CmsAdmin\Models\Customer.cs" />
@@ -199,15 +217,30 @@
     <Compile Include="Areas\CmsAdmin\ViewModel\CreatePageVM.cs" />
     <Compile Include="Areas\CmsAdmin\ViewModel\CustomerPageVM.cs" />
     <Compile Include="Areas\CmsAdmin\ViewModel\StudentPageVM.cs" />
+    <Compile Include="Areas\multiselecttry\Controllers\vuemultiselectController.cs" />
+    <Compile Include="Areas\multiselecttry\multiselecttryAreaRegistration.cs" />
+    <Compile Include="Areas\NewsPortal\Controllers\NewsController.cs" />
+    <Compile Include="Areas\NewsPortal\Controllers\PersonSearchController.cs" />
+    <Compile Include="Areas\NewsPortal\Controllers\PracticeController.cs" />
+    <Compile Include="Areas\NewsPortal\Models\MultiSelectModel.cs" />
+    <Compile Include="Areas\NewsPortal\Models\PersonSearch.cs" />
+    <Compile Include="Areas\NewsPortal\Models\summernoteNews.cs" />
+    <Compile Include="Areas\NewsPortal\Models\TypeAheadTable.cs" />
+    <Compile Include="Areas\NewsPortal\NewsPortalAreaRegistration.cs" />
+    <Compile Include="Areas\NewsPortal\ViewModel\AllNews.cs" />
     <Compile Include="Areas\PhotoSection\Controllers\PhotoCmsController.cs" />
     <Compile Include="Areas\PhotoSection\Controllers\PracticePhotoController.cs" />
+    <Compile Include="Areas\PhotoSection\Models\datetimemodel.cs" />
+    <Compile Include="Areas\PhotoSection\Models\Movie.cs" />
     <Compile Include="Areas\PhotoSection\Models\PhotoUpload.cs" />
+    <Compile Include="Areas\PhotoSection\Models\summernote.cs" />
     <Compile Include="Areas\PhotoSection\PhotoSectionAreaRegistration.cs" />
     <Compile Include="Areas\PhotoSection\ViewModel\CreateVM.cs" />
     <Compile Include="Areas\PhotoSection\ViewModel\ViewPhotoVM.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PeersonSearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,16 +251,132 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\multiselecttry\Content\bootstrap.css" />
+    <Content Include="Areas\multiselecttry\Content\font-awesome.min.css" />
+    <Content Include="Areas\multiselecttry\Content\sb-admin\css\sb-admin.css" />
+    <Content Include="Areas\multiselecttry\Content\site.css" />
+    <Content Include="Areas\multiselecttry\Content\vue-multiselect.min.css" />
+    <Content Include="Areas\multiselecttry\Scripts\bundle.js" />
+    <Content Include="Areas\multiselecttry\Scripts\jquery.easing.min.js" />
+    <Content Include="Areas\multiselecttry\Scripts\sb-admin\sb-admin.js" />
+    <Content Include="Areas\NewsPortal\template\fonts\League_Gothic-webfont.svg" />
+    <Content Include="Areas\NewsPortal\template\fonts\SIL OFL Font License - Source Sans Pro.txt" />
+    <Content Include="Areas\NewsPortal\template\fonts\SIL Open Font License 1.1.txt" />
+    <Content Include="Areas\NewsPortal\template\fonts\SourceSansPro-Light-webfont.svg" />
+    <Content Include="Areas\NewsPortal\template\style.css" />
+    <Content Include="Areas\PhotoSection\datetimePicker\demo.all.js" />
+    <Content Include="Areas\PhotoSection\datetimePicker\demo.js" />
+    <Content Include="Areas\PhotoSection\datetimePicker\webpack.config.js" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\lang\summernote-ar-AR.js" />
+    <Content Include="Content\lang\summernote-ar-AR.min.js" />
+    <Content Include="Content\lang\summernote-bg-BG.js" />
+    <Content Include="Content\lang\summernote-bg-BG.min.js" />
+    <Content Include="Content\lang\summernote-ca-ES.js" />
+    <Content Include="Content\lang\summernote-ca-ES.min.js" />
+    <Content Include="Content\lang\summernote-cs-CZ.js" />
+    <Content Include="Content\lang\summernote-cs-CZ.min.js" />
+    <Content Include="Content\lang\summernote-da-DK.js" />
+    <Content Include="Content\lang\summernote-da-DK.min.js" />
+    <Content Include="Content\lang\summernote-de-DE.js" />
+    <Content Include="Content\lang\summernote-de-DE.min.js" />
+    <Content Include="Content\lang\summernote-el-GR.js" />
+    <Content Include="Content\lang\summernote-el-GR.min.js" />
+    <Content Include="Content\lang\summernote-es-ES.js" />
+    <Content Include="Content\lang\summernote-es-ES.min.js" />
+    <Content Include="Content\lang\summernote-es-EU.js" />
+    <Content Include="Content\lang\summernote-es-EU.min.js" />
+    <Content Include="Content\lang\summernote-fa-IR.js" />
+    <Content Include="Content\lang\summernote-fa-IR.min.js" />
+    <Content Include="Content\lang\summernote-fi-FI.js" />
+    <Content Include="Content\lang\summernote-fi-FI.min.js" />
+    <Content Include="Content\lang\summernote-fr-FR.js" />
+    <Content Include="Content\lang\summernote-fr-FR.min.js" />
+    <Content Include="Content\lang\summernote-gl-ES.js" />
+    <Content Include="Content\lang\summernote-gl-ES.min.js" />
+    <Content Include="Content\lang\summernote-he-IL.js" />
+    <Content Include="Content\lang\summernote-he-IL.min.js" />
+    <Content Include="Content\lang\summernote-hr-HR.js" />
+    <Content Include="Content\lang\summernote-hr-HR.min.js" />
+    <Content Include="Content\lang\summernote-hu-HU.js" />
+    <Content Include="Content\lang\summernote-hu-HU.min.js" />
+    <Content Include="Content\lang\summernote-id-ID.js" />
+    <Content Include="Content\lang\summernote-id-ID.min.js" />
+    <Content Include="Content\lang\summernote-it-IT.js" />
+    <Content Include="Content\lang\summernote-it-IT.min.js" />
+    <Content Include="Content\lang\summernote-ja-JP.js" />
+    <Content Include="Content\lang\summernote-ja-JP.min.js" />
+    <Content Include="Content\lang\summernote-ko-KR.js" />
+    <Content Include="Content\lang\summernote-ko-KR.min.js" />
+    <Content Include="Content\lang\summernote-lt-LT.js" />
+    <Content Include="Content\lang\summernote-lt-LT.min.js" />
+    <Content Include="Content\lang\summernote-lt-LV.js" />
+    <Content Include="Content\lang\summernote-lt-LV.min.js" />
+    <Content Include="Content\lang\summernote-mn-MN.js" />
+    <Content Include="Content\lang\summernote-mn-MN.min.js" />
+    <Content Include="Content\lang\summernote-nb-NO.js" />
+    <Content Include="Content\lang\summernote-nb-NO.min.js" />
+    <Content Include="Content\lang\summernote-nl-NL.js" />
+    <Content Include="Content\lang\summernote-nl-NL.min.js" />
+    <Content Include="Content\lang\summernote-pl-PL.js" />
+    <Content Include="Content\lang\summernote-pl-PL.min.js" />
+    <Content Include="Content\lang\summernote-pt-BR.js" />
+    <Content Include="Content\lang\summernote-pt-BR.min.js" />
+    <Content Include="Content\lang\summernote-pt-PT.js" />
+    <Content Include="Content\lang\summernote-pt-PT.min.js" />
+    <Content Include="Content\lang\summernote-ro-RO.js" />
+    <Content Include="Content\lang\summernote-ro-RO.min.js" />
+    <Content Include="Content\lang\summernote-ru-RU.js" />
+    <Content Include="Content\lang\summernote-ru-RU.min.js" />
+    <Content Include="Content\lang\summernote-sk-SK.js" />
+    <Content Include="Content\lang\summernote-sk-SK.min.js" />
+    <Content Include="Content\lang\summernote-sl-SI.js" />
+    <Content Include="Content\lang\summernote-sl-SI.min.js" />
+    <Content Include="Content\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="Content\lang\summernote-sr-RS-Latin.min.js" />
+    <Content Include="Content\lang\summernote-sr-RS.js" />
+    <Content Include="Content\lang\summernote-sr-RS.min.js" />
+    <Content Include="Content\lang\summernote-sv-SE.js" />
+    <Content Include="Content\lang\summernote-sv-SE.min.js" />
+    <Content Include="Content\lang\summernote-ta-IN.js" />
+    <Content Include="Content\lang\summernote-ta-IN.min.js" />
+    <Content Include="Content\lang\summernote-th-TH.js" />
+    <Content Include="Content\lang\summernote-th-TH.min.js" />
+    <Content Include="Content\lang\summernote-tr-TR.js" />
+    <Content Include="Content\lang\summernote-tr-TR.min.js" />
+    <Content Include="Content\lang\summernote-uk-UA.js" />
+    <Content Include="Content\lang\summernote-uk-UA.min.js" />
+    <Content Include="Content\lang\summernote-vi-VN.js" />
+    <Content Include="Content\lang\summernote-vi-VN.min.js" />
+    <Content Include="Content\lang\summernote-zh-CN.js" />
+    <Content Include="Content\lang\summernote-zh-CN.min.js" />
+    <Content Include="Content\lang\summernote-zh-TW.js" />
+    <Content Include="Content\lang\summernote-zh-TW.min.js" />
+    <Content Include="Content\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.css" />
+    <Content Include="Content\multiselect.css" />
     <Content Include="Content\Photo.css" />
+    <Content Include="Content\PikaDateTimeCss\pikaday.css" />
+    <Content Include="Content\PikaDateTimeCss\pikaday.js" />
+    <Content Include="Content\PikaDateTimeCss\site.css" />
+    <Content Include="Content\PikaDateTimeCss\theme.css" />
+    <Content Include="Content\PikaDateTimeCss\triangle.css" />
     <Content Include="Content\StyleSheet1.css" />
+    <Content Include="Content\summernote.css" />
+    <Content Include="Content\typeahead-multiselect.css" />
+    <Content Include="Content\typeaheadjs.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -239,10 +388,45 @@
     <Content Include="Areas\CmsAdmin\Views\Shared\Error.cshtml" />
     <Content Include="Areas\CmsAdmin\Views\Shared\Lockout.cshtml" />
     <Content Include="Areas\CmsAdmin\Views\AdminCms\Create.cshtml" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\handlebars-v4.0.11.js" />
+    <Content Include="Areas\NewsPortal\Views\News\custTempTry.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Practice\Index.cshtml" />
+    <Content Include="Areas\PhotoSection\Views\PhotoCms\TypeAheadCustomeTemplate.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\custtemptryview.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Practice\multiselect.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Practice\multiselectVue.cshtml" />
+    <Content Include="Areas\multiselecttry\Views\web.config" />
+    <Content Include="Areas\multiselecttry\Views\vuemultiselect\Index.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Practice\VueDatatable.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Shared\_testpages.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\testtryshow.cshtml" />
+    <Content Include="Areas\CmsAdmin\Views\Shared\_testpages.cshtml" />
+    <Content Include="Areas\PhotoSection\Views\Shared\_testpages.cshtml" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Areas\NewsPortal\Views\Practice\ExcelTry.cshtml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\MdBootstrapPersianDateTimePicker\jalaali.js" />
+    <Content Include="Scripts\MdBootstrapPersianDateTimePicker\jquery.Bootstrap-PersianDateTimePicker.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\showAllPractices.js" />
+    <Content Include="Scripts\typeahead-multiselect.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="webpack.config.js" />
     <Content Include="Areas\CmsAdmin\Views\AdminCms\Modify.cshtml" />
     <Content Include="Areas\CmsAdmin\Views\AdminCms\details.cshtml" />
-    <Content Include="package.json" />
     <Content Include="package-lock.json" />
     <Content Include="Areas\PhotoSection\Views\web.config" />
     <Content Include="Areas\PhotoSection\Views\PhotoCms\Index.cshtml" />
@@ -261,10 +445,134 @@
     <Content Include="Areas\PhotoSection\Views\PracticePhoto\Index.cshtml" />
     <Content Include="Areas\PhotoSection\Views\PracticePhoto\Canvas.cshtml" />
     <Content Include="Areas\PhotoSection\Views\PracticePhoto\Canvasresizing.cshtml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Areas\PhotoSection\Views\PhotoCms\canvasheight.cshtml" />
+    <Content Include="Areas\PhotoSection\Views\PracticePhoto\quilljstry.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font\summernote.eot" />
+    <Content Include="Content\font\summernote.ttf" />
+    <Content Include="Content\font\summernote.woff" />
+    <Content Include="Areas\NewsPortal\Views\web.config" />
+    <Content Include="Areas\NewsPortal\Views\News\Index.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\create.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\modify.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\details.cshtml" />
+    <Content Include="Areas\PhotoSection\Views\PracticePhoto\tabletry.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\NewsList.cshtml" />
+    <Content Include="Areas\NewsPortal\template\fonts\League_Gothic-webfont.eot" />
+    <Content Include="Areas\NewsPortal\template\fonts\League_Gothic-webfont.ttf" />
+    <Content Include="Areas\NewsPortal\template\fonts\League_Gothic-webfont.woff" />
+    <Content Include="Areas\NewsPortal\template\fonts\SourceSansPro-Light-webfont.eot" />
+    <Content Include="Areas\NewsPortal\template\fonts\SourceSansPro-Light-webfont.ttf" />
+    <Content Include="Areas\NewsPortal\template\fonts\SourceSansPro-Light-webfont.woff" />
+    <Content Include="Areas\NewsPortal\Views\News\NewsDetail.cshtml" />
+    <Content Include="Areas\PhotoSection\Views\PracticePhoto\datetimepicker.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="Areas\PhotoSection\datetimePicker\demo.all.js.map" />
+    <Content Include="Areas\PhotoSection\datetimePicker\demo.vue" />
+    <Content Include="Areas\NewsPortal\Views\News\PersonSearch.cshtml" />
+    <Content Include="App_Code\GlyphIcon.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\PersonSearched.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\multidropdown.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\multidropdownTest.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\TypeAhead.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\typeaheadPrefetch.cshtml" />
+    <Content Include="Scripts\Countries.json" />
+    <Content Include="Areas\NewsPortal\Views\News\typeaheadRemote.cshtml" />
+    <Content Include="Areas\NewsPortal\TypeAheadData\Countries.json" />
+    <Content Include="Areas\NewsPortal\TypeAheadData\post_1960.json" />
+    <Content Include="Areas\CmsAdmin\Views\AdminCms\VueIndex.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\typeaheadCostumeTemplate.cshtml" />
+    <Content Include="Areas\NewsPortal\Views\News\typeaheadCostumeTemplateTry.cshtml" />
     <Content Include="Scripts\index.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -311,22 +619,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\multiselecttry\Models\" />
+    <Folder Include="Areas\multiselecttry\Views\Shared\" />
     <Folder Include="Image\" />
     <Folder Include="resizedImage\" />
     <Folder Include="Scripts\dist\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

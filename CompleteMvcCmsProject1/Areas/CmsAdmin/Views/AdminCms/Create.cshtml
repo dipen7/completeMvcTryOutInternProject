@@ -5,6 +5,7 @@
 
 <div class="row" id="app">
     <form action="Create" method="post" id="CreateForm" @@submit.prevent="testFormSubmit" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
         <h1 class="col-lg-offset-5 col-md-offset-5">Create Student</h1>
         <div class="row">
             <div class="row">

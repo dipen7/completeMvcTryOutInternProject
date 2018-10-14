@@ -30,11 +30,19 @@
         </div>
     </div>
     <div class="container body-content">
+
         @RenderBody()
+        <div class="row">
+            <input type="button" value="show Practice links" onclick="show()">
+            <div id="myDIV">
+                @Html.Partial("_testpages")
+            </div>
+        </div>
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/showAllPractices.js"></script>
 </body>
 </html>

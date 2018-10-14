@@ -1,0 +1,6 @@
+[v-cloak] {display: none;}
+.btn-vs {padding: 0.15rem 0.5rem;font-size: 0.675rem;line-height: 1.25;border-radius: 0;cursor: pointer;}
+.btn{ border-radius:0; cursor:pointer;}
+.form-control{ border-radius:0;}
+.role-list{ list-style:none; margin-left:-40px;}
+.role-list li a{ color:#7a1616; font-weight:bold;}

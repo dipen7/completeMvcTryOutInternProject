@@ -5,18 +5,18 @@
 <div class="body" id="app">
     <div class="row">
         <div class="col-lg-6 col-md-6">
-            <p>Image to use:</p>
+            
             <img id="scream" :src="url" alt="The Scream" width="220" height="277">
             <p><button v-on:click="myCanvas()">Upload</button></p>
         </div>
         <div class="col-lg-6 col-md-6">
-            @using (Html.BeginForm("Canvas", "PracticePhoto", new { area = "PhotoSection" }, FormMethod.Post, new { id = "drawingForm" }))
+            @using (Html.BeginForm("Canvasresizing", "PracticePhoto", new { area = "PhotoSection" }, FormMethod.Post, new { id = "drawingForm", enctype = "multipart/form-data" }))
             {
             <input type="hidden" name="imageData" id="imageData" />
             <input type="button" id="btnSave" value="preview Upload" @*onclick="checkMyCanvas()"*@ v-on:click="checkMyCanvas" />
             <div class="row form-group text-center">
                 <div class="form-group">
-                    <input type="file" name="ImageData" id="ImageData" @*v-on:click="previewimage"*@ @@change="onFileChange">
+                    <input type="file" name="FileName" id="FileName" @*v-on:click="previewimage"*@ @@change="onFileChange">
                     <label for="ImageData"> choose a image</label>
                 </div>
             </div>

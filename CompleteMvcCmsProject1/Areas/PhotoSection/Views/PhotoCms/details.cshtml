@@ -3,36 +3,52 @@
 @{
     ViewBag.Title = "View Photo";
 }
-<hr>
-<div class="row col-lg-offset-4 col-md-offset-4">
+
+<div class="row">
     
     <form action="/PhotoSection/PhotoCms/create" method="post" enctype="multipart/form-data">
         
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <label for="Id">Id:</label>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                @Model.Uploader.Id
-            </div>
-            <div class="col-lg-5 col-md-5">
-                <a href="@string.Format("/PhotoSection/PhotoCms/modify?id={0}",Model.Uploader.Id)">Modify</a>
+        <div class="col-lg-4 col-md-4">
+            <div class="row form-group text-right">
+                <a href="@string.Format("/Image/{0}",Model.Uploader.PhotoName)" target="_blank"><img src="@string.Format("/Image/{0}",Model.Uploader.PhotoName)" /></a>
+                <a href="@string.Format("/Image/{0}",Model.Uploader.PhotoName)" target="_blank"><div class="text-success">@Model.Uploader.PhotoName</div></a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <label for="AdminName">Admin Name*</label>
+        <div class="col-lg-8 col-md-8 text-right">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 text-right">
+                    <label for="Id">Id:</label>
+                </div>
+                <div class="col-lg-3 col-md-3 text-left">
+                    @Model.Uploader.Id
+                </div>
+                
             </div>
-            <div class="col-lg-4 col-md-4">
-                @Model.Uploader.AdminName
+            <div class="row">
+                <div class="col-lg-2 col-md-2 text-right">
+                    <label for="AdminName">Admin Name:</label>
+                </div>
+                <div class="col-lg-3 col-md-3 text-left">
+                    @Model.Uploader.AdminName
+                </div>
             </div>
-            <div class="col-lg-5 col-md-5">
-                <a href="/PhotoSection/PhotoCms/" >back</a>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 text-right">
+                    <label for="PhotoDetails">Detail:</label>
+                </div>
+                <div class="col-lg-6 col-md-6 text-left">
+                    @Model.Uploader.PhotoDetails
+                </div>
             </div>
-        </div>
-        <div class="row form-group">
-            <img src="@string.Format("/Image/{0}",Model.Uploader.PhotoName)" width="250" height="400" />
-            <a href="@string.Format("/Image/{0}",Model.Uploader.PhotoName)" target="_blank"><div class="text-success">@Model.Uploader.PhotoName</div></a>
-        </div>
+        </div>               
     </form>
+
+</div>
+<div class="row" style="padding-bottom:30px;">
+    <div class="col-lg-5 col-md-5 text-center">
+        <a class="btn btn-primary" href="@string.Format("/PhotoSection/PhotoCms/modify?id={0}",Model.Uploader.Id)">Modify</a>
+    </div>
+    <div class="col-lg-7 col-md-7 text-left">
+        <a class="btn btn-primary" href="@string.Format("/PhotoSection/PhotoCms/")">back</a>
+    </div>
 </div>

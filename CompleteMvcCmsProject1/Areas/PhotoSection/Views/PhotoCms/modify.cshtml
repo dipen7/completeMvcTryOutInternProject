@@ -5,9 +5,9 @@
 }
 
 <div class="row" id="app">
-    <form action="/PhotoSection/PhotoCms/modify" method="post" enctype="multipart/form-data" class="text-center">
+    <form action="/PhotoSection/PhotoCms/modify" method="post" enctype="multipart/form-data" class="text-center" id="drawingForm">
 
-
+        <input type="hidden" name="ImageString" id="ImageString" />
         <div class="row">
             <div class="col-lg-5 col-md-5 text-center">
                 <a href="/PhotoSection/PhotoCms/"><div class="btn btn-primary">back</div></a>
@@ -16,7 +16,11 @@
                 <label for="AdminName">Admin Name*:</label>
                 @Model.Uploader.AdminName
             </div>
-            
+            <div class="col-lg-7 col-md-7 text-left">
+                <label for="PhotoDetails">Photo Details*:</label>
+                <input type="text" id="PhotoDetails" name="PhotoDetails" value="@Model.Uploader.PhotoDetails" />
+            </div>
+
         </div>
 
         <div class="form-group row hidden">
@@ -27,18 +31,22 @@
                 <input type="text" name="Id" value="@Model.Uploader.Id">
             </div>
         </div>
-
+        <canvas hidden name="PreviewUpload" id="kfCanvas" width="250px" height="300px;" style="border: 3px dotted #000;">
+            Sorry, your browser doesn't support canvas technology.
+        </canvas>
 
         <div class="row form-group text-center">
-            <img :src="url" width="250" height="400" id="image-field" title="previous">
+            <div id="preview">
+                <img v-if="url" id="imagePreview" :src="url" width="250px" />
+            </div>
         </div>
         <div>
-        <div class="col-lg-8 col-md-8 col-lg-offset-4 col-md-offset-4 col-sm-9 col-sm-offset-3">
-            <input class="btn btn-default" type="file" name="ImageData" id="ImageData" onchange="previewimage(event)" />
-        </div>
+            <div class="col-lg-8 col-md-8 col-lg-offset-4 col-md-offset-4 col-sm-9 col-sm-offset-3">
+                <input class="btn btn-default" type="file" name="ImageData" id="ImageData" @@change="onFileChange" />
+            </div>
         </div>
         <div class="row form-group">
-            <input type="submit" class="btn btn-primary" value="Modify Entry" />
+            <input type="submit" class="btn btn-primary" v-on:click="heightImg" value="Modify Entry" />
         </div>
     </form>
 </div>
@@ -61,7 +69,31 @@
             el: '#app',
             data: {
                 message: "Hello from Vue.js using webpack.",
-                url: "/Image/@Model.Uploader.PhotoName"
+                url: "/Image/@Model.Uploader.PhotoName",
+                PhotoDetails:"@Model.Uploader.PhotoDetails"
+            },
+            methods: {            
+                heightImg: function () {
+                var hght = document.getElementById("imagePreview").clientHeight;
+                var c = document.getElementById("kfCanvas");
+                c.height = hght;
+                var ctx = c.getContext("2d");
+                var img = document.getElementById("imagePreview");
+                var hght = document.getElementById("imagePreview").clientHeight;
+                var wdh = document.getElementById("imagePreview").clientWidth;
+                ctx.drawImage(img, 0, 0, wdh, hght);
+                var form = $("#drawingForm");
+                var image = document.getElementById("kfCanvas").toDataURL("image/png");
+                image = image.replace('data:image/png;base64,', '');
+                $("#ImageString").val(image);
+                form.submit();
+                console.log(hght);
+                console.log(c.height);
+                },
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    this.url = URL.createObjectURL(file);
+                }
             }
         });
 

@@ -1,0 +1,26 @@
+﻿
+@model CompleteMvcCmsProject1.Areas.NewsPortal.ViewModel.AllNews
+
+@{
+
+    ViewBag.Title = "Index";
+}
+@section Styles{
+    <link href="~/Areas/NewsPortal/template/style.css" rel="stylesheet" />
+}
+<h2>News List</h2>
+<div class="row" style="overflow:hidden;">
+    @foreach (var news in Model.Newsz)
+    {
+    <article style="overflow: hidden;">
+        <h1>@news.Subject</h1>
+        @Html.Raw(HttpUtility.HtmlDecode(news.Discussion))
+        <a href="@string.Format("newsdetail/?id={0}",news.Id)" class="readmore">Read more</a>
+    </article>
+    }
+</div>
+
+
+@section scripts{
+    
+}

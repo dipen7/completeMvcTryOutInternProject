@@ -1,0 +1,150 @@
+﻿@section Styles{
+<style type="text/css">
+    td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        margin: 15px 0;
+        border: 1px solid black;
+        table-layout: fixed;
+        width: 100%; /* must have this set */        
+    }
+
+    .sturdy td:nth-child(1),
+    .sturdy td:nth-child(3) {
+        width: 25%;
+    }
+
+    .sturdy td:nth-child(2) {
+        width: 50%;
+    }
+
+    .nobreak {
+        white-space: nowrap;
+    }
+
+    .wider td {
+        width: 300px;
+    }
+
+
+    .ignoreyou td:nth-child(1) {
+        width: 10px;
+    }
+
+    .ignoreyou td:nth-child(2) {
+        width: 30px;
+    }
+
+    .cut-off th:nth-child(1) {
+        width: 75%;
+    }
+
+    .cut-off td:nth-child(1) {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .cut-off th:nth-child(2) {
+        width: 25%;
+    }
+
+    .cut-off td:nth-child(2) span {
+        display: block;
+    }
+
+
+    .hide td {
+        overflow: hidden;
+    }
+
+    .scroll-code td {
+        overflow: auto;
+    }
+</style>
+}
+
+<h1>Fixed Tables Solve Some Issues</h1>
+
+<table class="sturdy">
+    <tr>
+        <td>I'm 25% wide.</td>
+        <td>I'm 50% wide.</td>
+        <td>I'm 25% wide.</td>
+    </tr>
+    <tr>
+        <td>Text down here doesn't affect layout anymore.</td>
+        <td>...</td>
+        <td>This long sentence would probably have pushed this row wider.</td>
+    </tr>
+</table>
+
+<table class="nobreak">
+    <tr>
+        <td>The table itself will not exceed</td>
+        <td>the exact width you set the table to be, from content alone.</td>
+    </tr>
+</table>
+
+<table class="wider">
+    <tr>
+        <td>Well, unless YOU force it wider by</td>
+        <td>setting the cells wider (combined) than the table is wide.</td>
+    </tr>
+</table>
+
+<table class="ignoreyou">
+    <tr>
+        <td>It won't go smaller though, it will do a calculation.</td>
+        <td>...</td>
+    </tr>
+    <tr>
+        <td>Set to 10px<br>Thus 25% of total 40px</td>
+        <td>Set to 30px<br>Thus 75% of total 40px</td>
+    </tr>
+</table>
+
+<table class="cut-off">
+    <thead>
+        <tr>
+            <th>My favorite feature is being able to ellipsis text.</th>
+            <th>It's great for user-generated text.</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>&lt;p&gt;Hello Summernote adsfasdf&lt;u&gt;sadf&lt;/u&gt;&lt;span style="font-family: &amp;quot;Comic Sans MS&amp;quot;;"&gt;﻿&lt;b&gt;asdfasdf&lt;u&gt;asdfasdf&lt;/u&gt;&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;&lt;table class="table table-bordered"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;&lt;span style="font-family: &amp;quot;Comic Sans MS&amp;quot;;"&gt;&lt;b&gt;&lt;u&gt;&lt;br&gt;&lt;/u&gt;&lt;/b&gt;&lt;/span&gt;&lt;/p&gt;</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>This little piggy went to market. This little piggy went to bed.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis amet molestiae earum accusantium nostrum eveniet ipsum soluta ut reprehenderit vel incidunt laboriosam dolorum maiores! Earum deserunt sit unde? Sunt voluptatem!</td>
+        <td>1</td>
+    </tr>
+</table>
+
+<table class="hide">
+    <tr>
+        <td class="img-1">Overflow can be hidden.</td>
+        <td class="img-2">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/dock-slice-2.png" />
+        </td>
+    </tr>
+</table>
+
+<table class="scroll-code">
+    <tr>
+        <td>Overflow can scroll. Except in Firefox.</td>
+        <td>
+            <pre>
+body.logged-in article > h2 {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 0, 0, 0.2));      
+}
+    </pre>
+        </td>
+    </tr>
+</table>

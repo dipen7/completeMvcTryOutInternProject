@@ -4,7 +4,8 @@
 
 <div class="body" id="app">
     <div class="row">
-        <form action="/PhotoSection/PhotoCms/create" method="post" enctype="multipart/form-data">
+        <form action="/PhotoSection/PhotoCms/create" method="post" enctype="multipart/form-data" id="drawingForm">
+            <input type="hidden" name="ImageString" id="ImageString" />
             <div class="row form-group">
                 <div class="col-lg-6 col-md-6 text-right">
                     <label for="AdminName">Admin Name:</label>
@@ -17,15 +18,26 @@
                 <div class="col-md-7 col-lg-7 col-lg-offset-5 col-md-offset-5">
                     <input type="file" name="ImageData" id="ImageData" @*v-on:click="previewimage"*@ @@change="onFileChange">
                 </div>
-                <div class="row" >
+                <div class="row">
                     <label> choose a image</label>
                     <div id="preview">
-                        <img v-if="url" :src="url"  />
+                        <img v-if="url" id="imagePreview" :src="url" />
                     </div>
                 </div>
             </div>
+            <div class="row form-group">
+                
+                <div class="row form-group">
+                    <canvas hidden name="PreviewUpload" id="kfCanvas" width="250px" height="300px;" style="border: 3px dotted #000;">
+                        Sorry, your browser doesn't support canvas technology.
+                    </canvas>
+                    
+                </div>
+            </div>
             <div class="row form-group text-center">
-                <input type="submit" value="upload Image" />
+                @*<p><button v-on:click="myCanvas()">Upload</button></p>*@
+                <input type="submit" v-on:click="myCanvas" value="Upload">
+                @*<input type="submit" value="upload Image" />*@
             </div>
         </form>
     </div>
@@ -48,7 +60,8 @@
         new Vue({
             el: '#app',
             data: {
-                url: null
+                url: null,
+                photodetails:''
             },
             methods: {
                 testFormSubmit: function () {
@@ -76,6 +89,30 @@
                 onFileChange(e) {
                     const file = e.target.files[0];
                     this.url = URL.createObjectURL(file);
+                },
+                myCanvas: function () {
+                    var hght = document.getElementById("imagePreview").clientHeight;
+                    var c = document.getElementById("kfCanvas");
+                    c.height = hght;
+                    var ctx = c.getContext("2d");
+                    var img = document.getElementById("imagePreview");
+                    var hght = document.getElementById("imagePreview").clientHeight;
+                    var wdh = document.getElementById("imagePreview").clientWidth;
+                    ctx.drawImage(img, 0, 0, hght, wdh);
+                    var form = $("#drawingForm");
+                    var image = document.getElementById("kfCanvas").toDataURL("image/png");
+                    image = image.replace('data:image/png;base64,', '');
+                    $("#ImageString").val(image);
+
+                    //var c = document.getElementById("kfCanvas");
+                    //var ctx = c.getContext("2d");
+                    //var img = document.getElementById("imagePreview");
+                    //ctx.drawImage(img, 0, 0, 250, 300);
+                    //var form = $("#drawingForm");
+                    //var image = document.getElementById("kfCanvas").toDataURL("image/png");
+                    //image = image.replace('data:image/png;base64,', '');
+                    //$("#ImageString").val(image);
+                    //form.submit();
                 }
             }
         });

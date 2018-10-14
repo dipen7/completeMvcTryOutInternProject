@@ -1,0 +1,209 @@
+﻿
+@model CompleteMvcCmsProject1.Areas.NewsPortal.Models.PersonSearch
+
+@{
+    ViewBag.Title = "Person Search";
+}
+@section Styles{
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .dropbtn:hover, .dropbtn:focus {
+                background-color: #3e8e41;
+            }
+
+        #myInput {
+            border-box: box-sizing;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+            #myInput:focus {
+                outline: 3px solid #ddd;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+}
+<h2>Search/Filter Dropdown</h2>
+<p>Click on the button to open the dropdown menu, and use the input field to search for a specific dropdown link.</p>
+
+
+
+<div class="row" id="app" v-cloak>
+    <div class="col-lg-12 col-md-12">
+        <div class="page-container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <form action="/post-test" method="post" id="testForm" @@submit.prevent="testFormSubmit">
+                        <div class="form-group">
+                            <label for="test-name">Test Select *</label>
+                            <select name="StudentId" v-model="studentId" v-validate="'required|otherThanZero'" data-vv-as="Student Category" type="text" class="form-control">
+                                <option value="0">Select Item</option>
+                                <option v-for="student in studentData" :value="student.Id">{{student.FirstName}}</option>
+                            </select>
+                            <span v-show="errors.has('StudentId')" class="text-danger form-error">{{ errors.first('StudentId') }}</span>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="dropdown col-lg-12 col-md-12">
+            <button @@click="myFunction" class="dropbtn col-lg-2 col-md-2"><span class="fa fa-search"></span></button>
+            <div id="myDropdown" class="dropdown-content col-lg-10 col-md-10">
+                <input type="text" placeholder="Search.." id="myInput" v-model="search" @@keyup="filterFunction">
+                <a :href="'/NewsPortal/News/PersonSearched/' + student.Id" v-show="search" v-for="student in studentData" :value="student.Id">{{student.FirstName }} {{ student.MiidName}} {{student.LastName}}</a>
+            </div>
+        </div>
+    </div>    
+</div>
+
+@section Scripts{
+    @*<script>
+            /* When the user clicks on the button,
+            toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            function filterFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+                    }
+                }
+            }
+        </script>*@
+
+
+
+    <script type="text/javascript">
+        Vue.use(VeeValidate);
+        new Vue({
+            el: '#app',
+            data: {
+                studentId: 0,
+                studentData: [],
+                search: ''
+            },
+            methods: {
+                myFunction: function () {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                },
+                filterFunction: function () {
+                    var vm = this;
+                    var apiUrl = "/values/SearchByName/";
+                    axios.get(apiUrl + vm.search)
+                        .then(function (response) {
+                            vm.studentData = response.data;
+                        })
+                        .catch(function (error) {
+
+                        });
+                    console.log(this.studentData);
+                    //var input, filter, ul, li, a, i;
+                    ////input = document.getElementById("myInput");
+                    //filter = this.search.toUpperCase();
+                    //div = document.getElementById("myDropdown");
+                    //a = div.getElementsByTagName("a");
+                    //for (i = 0; i < a.length; i++) {
+                    //    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    //        a[i].style.display = "";
+                    //    } else {
+                    //        a[i].style.display = "none";
+                    //    }
+                    //}
+                },
+                change: function () {
+                    var vm = this;
+                    var apiUrl = "/values/getallproducts/";
+                    axios.get(apiUrl + vm.search)
+                        .then(function (response) {
+                            vm.studentData = response.data;
+                        })
+                        .catch(function (error) {
+
+                        });
+                    console.log(this.studentData);
+                },
+                getStudentData: function () {
+                    var vm = this;
+                    axios.get('/values/getallproducts/')
+                        .then(function (response) {
+                            vm.studentData = response.data;
+                        })
+                        .catch(function (error) {
+
+                        });
+                    console.log(this.studentData);
+                },
+                testFormSubmit: function () {
+                    this.$validator.validateAll().then((result) => {
+                        if (result) {
+                            document.querySelector('#testForm').submit();
+                        }
+                    }).catch(() => {
+                        var errorBag = this.$validator.getErrors();
+                        var fieldName = errorBag.errors[0].field;
+                        document.querySelector('[name="' + fieldName + '"]').focus();
+                        e.preventDefault();
+                    });
+                }
+            },
+            mounted: function () {
+                this.getStudentData();
+            }
+        });
+    </script>
+}

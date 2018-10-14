@@ -1,0 +1,95 @@
+﻿
+@section Styles{
+
+    <link href="~/Content/multiselect.css" rel="stylesheet" />
+}
+
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            components: { Multiselect },
+            data: {
+                crew: {
+                    name: '',
+                    namenepali: '',
+                    postMessage: '',
+                    isPosting: false,
+                    selectedCrew: [],
+                    crewData: [],
+                    isLoading: false,
+                }
+            },
+            methods: {
+                limitText(count) {
+                    return `and ${count} other items`
+                },
+                loadCrewData: function (query) {
+                    var vm = this;
+                    axios.get('/api/general/crew/search?query=' + query)
+                        .then(function (response) {
+                            vm.crew.crewData = [];
+                            if (response.data.statusCode == 200) {
+                                vm.crew.crewData = response.data.result;
+                            }
+                        })
+                        .catch(function (error) {
+                            alert(error);
+                        })
+                },
+                convertToCommaSeparated: function (item) {
+                    var temp = "";
+                    Object.keys(item).forEach(function (key) {
+                        temp += item[key].id + ",";
+                    });
+                    return temp;
+                },
+                submitForm: function () {
+                    document.querySelector("#crewIdsString").value = this.convertToCommaSeparated(this.crew.selectedCrew);
+                    let crewString = document.querySelector("#crewIdsString").value;
+                    if (!crewString) {
+                        alert("The Crews are not selected.");
+                        return;
+                    }
+                    document.querySelector("#thisForm").submit();
+                },
+                postCrew: function () {
+                    var vm = this;
+                    vm.crew.isPosting = true;
+                    vm.crew.postMessage = '';
+                    axios({
+                        method: 'post',
+                        url: '/api/general/crew/insert',
+                        data: { "Name": vm.crew.name, "NameNepali": vm.crew.namenepali }
+                    })
+                        .then(function (response) {
+                            //console.log(response);
+                            if (response.data.statusCode == 200) {
+                                vm.crew.postMessage = response.data.result;
+                                vm.crew.isPosting = false;
+                                vm.crew.name = '';
+                                vm.crew.namenepali = '';
+                            }
+                            if (response.data.statusCode != 200) {
+                                vm.crew.postMessage = response.data.errorMessage;
+                                vm.crew.isPosting = false;
+                                vm.crew.name = '';
+                                vm.crew.namenepali = '';
+                            }
+                        })
+                        .catch(function (error) {
+                            vm.crew.isPosting = false;
+                        });
+                }
+            },
+            mounted: function () {
+
+            }
+        });
+    </script>
+}
+

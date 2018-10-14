@@ -1,0 +1,84 @@
+﻿@model CompleteMvcCmsProject1.Areas.NewsPortal.ViewModel.AllNews
+
+@{
+
+    ViewBag.Title = "Index";
+}
+@section Styles{
+
+    <link href="~/Content/Photo.css" rel="stylesheet" />
+}
+<h2>News Portal CMS</h2>
+<div class="row" id="app">
+    <div class="col-lg-12 col-md-12">
+            <table class="col-lg-12 col-md-12 table table-responsive table-condensed" style="table-layout: fixed;">
+                <tr >
+                    <th class="col-lg-1 col-md-1">
+                        S.No.:
+                    </th>
+                    <th class="col-lg-3 col-md-3">
+                        Subject:
+                    </th>
+                    <th class="col-lg-4 col-md-4">
+                        News Description:
+                    </th>
+                    <th class="col-lg-4 col-md-4">
+                        Actions:
+                    </th>
+                </tr>
+                @foreach (var news in Model.Newsz)
+            {
+                <tr >
+                    <td class="col-lg-1 col-md-1">
+                        @news.Id
+                    </td>
+                    <td class="col-lg-3 col-md-3">
+                        @news.Subject
+                    </td>
+                    <td class="col-lg-4 col-md-4" style="overflow: hidden;">
+                        @news.Discussion
+                    </td>
+                    <td class="col-lg-4 col-md-4">
+                        <span class="btn">
+                            <a href="@string.Format("news/newsdetail/?id={0}",news.Id)">Details</a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/NewsPortal/news/modify?id={0}",news.Id)">
+                                @string.Format("Modify {0}", news.Id)
+                            </a>
+                        </span>
+                        <span class="btn">
+                            <a href="@string.Format("/NewsPortal/news/deleteNews?id={0}",news.Id)">Delete</a>
+                        </span>
+                    </td>
+                </tr>
+        }
+            </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#summernote').summernote();
+            document.getElementById("Discussion").value = safe_tags(document.getElementById("Discussion").value);
+        });
+
+        function safe_tags(str) {
+            return str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        }
+
+        Vue.use(VeeValidate);
+        new Vue({
+            el: '#app',
+            data: {
+                todo: {
+                    text: 'Learn Vue',
+                    isComplete: false
+                },
+                Dynamic:" dynamic data",
+                message: "Hello from Vue.js using webpack."
+            }
+        });
+    </script>
+}
